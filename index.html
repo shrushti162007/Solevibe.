@@ -1,205 +1,70 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>SoleVibe — Premium Footwear</title>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Arial,sans-serif;background:#080908;color:#fff}
-button,input{font:inherit}button{cursor:pointer}
-:root{--g:#b9ff31;--card:#111311;--muted:#999}
-header{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid #222;position:sticky;top:0;background:#080908ee;backdrop-filter:blur(12px);z-index:20}
-.logo{font-size:25px;font-weight:900;letter-spacing:-1px}.logo b{color:var(--g)}
-nav{display:flex;gap:25px}nav a{color:#bbb;text-decoration:none;font-size:14px}nav a:hover{color:var(--g)}
-.headbtn{border:1px solid #333;background:#111;color:#fff;border-radius:30px;padding:10px 15px}.headbtn:hover{border-color:var(--g)}
-.hero{min-height:650px;padding:80px 7%;display:grid;grid-template-columns:1fr 1fr;align-items:center;overflow:hidden}
-.hero h1{font-size:clamp(50px,7vw,90px);line-height:.9;letter-spacing:-5px}.hero h1 span{color:var(--g)}
-.hero p{color:#aaa;max-width:500px;margin:28px 0;font-size:17px;line-height:1.7}
-.primary{border:0;background:var(--g);color:#080908;font-weight:800;border-radius:30px;padding:14px 23px}
-.primary:hover{transform:translateY(-2px);box-shadow:0 0 25px #b9ff3144}
-.heroimg{width:100%;max-width:600px;filter:drop-shadow(0 30px 30px #000);animation:float 4s ease-in-out infinite}
-@keyframes float{50%{transform:translateY(-15px) rotate(-2deg)}}
-.features{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;padding:25px 7% 60px}
-.feature{background:#101210;border:1px solid #222;padding:25px;border-radius:20px}.feature b{color:var(--g);font-size:25px}.feature p{color:#888;margin-top:8px}
-.shop{padding:50px 7%}.top{display:flex;justify-content:space-between;gap:15px;align-items:center;margin-bottom:30px}.top h2{font-size:40px}.filters{display:flex;gap:8px;flex-wrap:wrap}.filter{background:#111;color:#aaa;border:1px solid #292929;padding:9px 15px;border-radius:20px}.filter.active,.filter:hover{background:var(--g);color:#000}
-.search{background:#111;border:1px solid #333;color:white;border-radius:25px;padding:11px 15px;width:190px}
-.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.card{background:var(--card);border:1px solid #222;border-radius:22px;overflow:hidden;transition:.3s;position:relative}.card:hover{transform:translateY(-8px);border-color:#444}
-.pic{height:240px;background:#171917;display:flex;align-items:center;justify-content:center;overflow:hidden}.pic img{width:100%;height:100%;object-fit:cover;transition:.5s}.card:hover .pic img{transform:scale(1.06)}
-.heart{position:absolute;right:12px;top:12px;background:#090a09cc;border:1px solid #333;color:#fff;width:38px;height:38px;border-radius:50%}.heart.on{color:var(--g)}
-.info{padding:18px}.info h3{font-size:18px}.info p{color:#777;font-size:13px;margin:7px 0 14px}.price{font-size:20px;font-weight:bold}.buy{float:right;background:#202420;color:var(--g);border:0;padding:9px 14px;border-radius:20px;font-weight:bold}
-.news{margin:50px 7%;padding:50px;background:linear-gradient(120deg,#121612,#0d0e0d);border:1px solid #252825;border-radius:25px;text-align:center}.news h2{font-size:35px}.news p{color:#888;margin:10px 0 22px}
-.news input{padding:14px 18px;border-radius:25px;border:1px solid #333;background:#080908;color:#fff;width:260px}
-footer{border-top:1px solid #222;padding:30px 7%;color:#777;text-align:center;font-size:13px}.credit{color:var(--g);margin-top:8px}
-.drawer{position:fixed;right:-440px;top:0;width:420px;max-width:100%;height:100vh;background:#0d0f0d;border-left:1px solid #333;z-index:50;transition:.4s;display:flex;flex-direction:column}.drawer.show{right:0}
-.dhead{padding:22px;border-bottom:1px solid #222;display:flex;justify-content:space-between}.close{background:none;border:0;color:white;font-size:25px}
-.items{padding:20px;overflow:auto;flex:1}.item{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid #222}.item img{width:75px;height:75px;object-fit:cover;border-radius:12px}.iteminfo{flex:1}.iteminfo h4{margin-bottom:5px}.iteminfo p{font-size:13px;color:#888}.qty{display:flex;align-items:center;gap:8px;margin-top:9px}.qty button{background:#222;color:#fff;border:0;border-radius:8px;width:28px;height:28px}.lineTotal{color:var(--g);font-size:13px;margin-top:7px}.drawbottom{padding:20px;border-top:1px solid #222}.total{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}.total b{font-size:21px;color:var(--g)}
-.modal{position:fixed;inset:0;background:#000b;z-index:60;display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}
-.box{background:#101210;border:1px solid #333;border-radius:24px;width:600px;max-width:100%;max-height:90vh;overflow:auto;padding:28px}.box h2{font-size:30px;margin-bottom:20px}.form{display:grid;gap:12px}.form input{background:#080908;border:1px solid #333;color:#fff;padding:14px;border-radius:12px}.summary{background:#171917;border-radius:15px;padding:16px;margin:5px 0}.summaryrow{display:flex;justify-content:space-between;padding:6px 0;color:#bbb}.summaryrow strong{color:#fff}.pay{display:flex;gap:15px;flex-wrap:wrap}.pay label{background:#181a18;padding:12px;border-radius:12px}.success{text-align:center;padding:20px}.success .tick{font-size:60px;color:var(--g);margin-bottom:15px}.success p{color:#aaa;line-height:1.7;margin:10px 0 20px}
-.toast{position:fixed;bottom:25px;left:50%;transform:translate(-50%,100px);background:#b9ff31;color:#080908;padding:13px 20px;border-radius:30px;font-weight:bold;z-index:100;transition:.4s}.toast.show{transform:translate(-50%,0)}
-.fly{position:fixed;z-index:90;width:70px;height:70px;object-fit:cover;border-radius:15px;pointer-events:none;animation:fly .7s ease forwards}@keyframes fly{to{left:calc(100% - 75px);top:25px;transform:scale(.25) rotate(20deg);opacity:.3}}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr;text-align:center}.heroimg{margin:30px auto 0}.features{grid-template-columns:1fr}.top{flex-direction:column;align-items:flex-start}}
-@media(max-width:550px){nav{display:none}.grid{grid-template-columns:1fr}.hero{padding:60px 6%}.hero h1{font-size:55px}.pic{height:280px}.search{width:100%}.top h2{font-size:32px}}
-</style>
-</head>
-<body>
+<!doctype html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>SOLE VIBE</title><style>
+*{box-sizing:border-box}body{margin:0;background:#080808;color:#eee;font:14px Arial,sans-serif}button{cursor:pointer;border:0}header{position:sticky;top:0;z-index:9;background:#090909eF;backdrop-filter:blur(15px);border-bottom:1px solid #222;padding:16px 5%;display:flex;align-items:center;gap:25px}logo{font-size:25px;font-weight:900;letter-spacing:3px;color:#b9ff31}nav{margin-left:auto;display:flex;gap:18px}nav button,.ghost{background:none;color:#ddd;font-weight:bold}.hero{padding:70px 6%;background:radial-gradient(circle at 80%,#b9ff311c,transparent 35%)}h1{font-size:clamp(45px,9vw,90px);line-height:.9;margin:10px 0;font-weight:900}h1 span,.price{color:#b9ff31}.hero p{color:#999;max-width:550px;font-size:17px;line-height:1.6}.btn{background:#b9ff31;color:#050505;padding:14px 22px;border-radius:12px;font-weight:900;transition:.25s}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px #b9ff3133}.tools{padding:20px 6%;display:flex;gap:10px;flex-wrap:wrap}.tools input{flex:1;min-width:200px;background:#151515;border:1px solid #292929;color:white;padding:13px 16px;border-radius:12px}.cat{padding:11px 16px;border-radius:12px;background:#171717;color:#aaa}.cat.on,.cat:hover{background:#b9ff31;color:#050505}.grid{padding:20px 6% 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}.card{background:#111;border:1px solid #242424;border-radius:20px;overflow:hidden;transition:.3s}.card:hover{transform:translateY(-7px);border-color:#b9ff31}.pic{height:230px;background:#161616;position:relative}.pic img{width:100%;height:100%;object-fit:cover}.heart{position:absolute;right:12px;top:12px;background:#000b;color:white;border-radius:50%;width:38px;height:38px;font-size:18px}.info{padding:18px}.info small{color:#777}.info h3{margin:7px 0;font-size:18px}.row{display:flex;align-items:center;justify-content:space-between;gap:8px}.add{background:#b9ff31;color:#050505;padding:10px 13px;border-radius:10px;font-weight:900}.cart{position:fixed;right:0;top:0;height:100%;width:min(420px,100%);background:#0d0d0d;z-index:20;transform:translateX(100%);transition:.35s;padding:25px;overflow:auto;border-left:1px solid #333}.cart.show{transform:none}.cart h2{margin-top:5px}.close{float:right;background:#222;color:white;border-radius:10px;padding:9px 13px}.item{display:flex;gap:12px;padding:15px 0;border-bottom:1px solid #292929}.item img{width:75px;height:75px;object-fit:cover;border-radius:10px}.qty button{background:#222;color:white;padding:5px 9px;border-radius:6px}.total{font-size:20px;font-weight:bold;margin:22px 0}.modal{position:fixed;inset:0;background:#000c;z-index:30;display:none;place-items:center;padding:20px}.modal.show{display:grid}.box{background:#111;border:1px solid #333;border-radius:24px;width:min(800px,100%);max-height:90vh;overflow:auto;padding:25px}.productview{display:grid;grid-template-columns:1fr 1fr;gap:25px}.productview img{width:100%;height:330px;object-fit:cover;border-radius:18px}.sizes{margin:20px 0;padding:16px;border:1px solid #292929;border-radius:18px;background:linear-gradient(145deg,#171717,#0d0d0d)}.sizes b{display:block;color:#aaa;margin-bottom:13px;letter-spacing:1px}.sizegrid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}.sizebtn{position:relative;padding:13px 5px;border:1px solid #333;border-radius:12px;background:#181818;color:#aaa;font-weight:900;transition:.25s;overflow:hidden}.sizebtn:hover{border-color:#b9ff31;color:white;transform:translateY(-4px);box-shadow:0 8px 20px #000}.sizebtn.on{background:#b9ff31;color:#050505;border-color:#b9ff31;transform:translateY(-4px);box-shadow:0 0 0 4px #b9ff3120,0 10px 28px #b9ff3133}.sizebtn.on:after{content:"✓";position:absolute;right:5px;top:2px;font-size:10px}.form input{width:100%;padding:13px;margin:7px 0;background:#171717;border:1px solid #333;border-radius:10px;color:white}.empty{color:#777;text-align:center;padding:35px}footer{text-align:center;padding:30px;border-top:1px solid #222;color:#666}@media(max-width:600px){header{padding:13px 4%}nav button{font-size:12px}.hero{padding:55px 5%}.grid{padding:15px 5% 50px;grid-template-columns:repeat(2,1fr);gap:12px}.pic{height:170px}.info{padding:12px}.info h3{font-size:15px}.productview{grid-template-columns:1fr}.productview img{height:250px}.sizegrid{grid-template-columns:repeat(3,1fr)}} 
+</style></head><body>
 
-<header>
-<div class="logo">SOLE<b>VIBE</b>.</div>
-<nav><a href="#home">Home</a><a href="#shop">Shop</a><a href="#about">About</a></nav>
-<button class="headbtn" onclick="openCart()">🛒 Cart <span id="cartNum">0</span></button>
-</header>
+<header><logo>SOLE VIBE</logo><nav><button onclick="scrollTo({top:document.querySelector('.grid').offsetTop,behavior:'smooth'})">SHOP</button><button onclick="openCart()">🛒 <span id="count">0</span></button></nav></header>
 
-<section class="hero" id="home">
-<div>
-<p style="color:var(--g);font-weight:bold;letter-spacing:3px">STEP INTO YOUR VIBE</p>
-<h1>WALK<br><span>DIFFERENT.</span></h1>
-<p>Discover premium sneakers designed for everyday movement, street style and everything in between.</p>
-<button class="primary" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Explore Collection →</button>
-</div>
-<img class="heroimg" src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=90">
-</section>
+<section class="hero"><small>NEW SEASON • 2026</small><h1>MOVE<br><span>YOUR WAY.</span></h1><p>Premium footwear built for movement, street energy and everyday confidence.</p><button class="btn" onclick="scrollTo({top:document.querySelector('.grid').offsetTop,behavior:'smooth'})">SHOP COLLECTION →</button></section>
 
-<section class="features" id="about">
-<div class="feature"><b>01</b><h3>Premium Style</h3><p>Modern designs made to stand out.</p></div>
-<div class="feature"><b>02</b><h3>Easy Shopping</h3><p>Simple browsing and smooth checkout.</p></div>
-<div class="feature"><b>03</b><h3>Fast Delivery</h3><p>Get your favourite pair delivered.</p></div>
-</section>
+<div class="tools"><input id="search" placeholder="Search shoes..." oninput="render()"><button class="cat on" onclick="filter('All',this)">All</button><button class="cat" onclick="filter('Sneakers',this)">Sneakers</button><button class="cat" onclick="filter('Running',this)">Running</button><button class="cat" onclick="filter('Sports',this)">Sports</button><button class="cat" onclick="filter('Casual',this)">Casual</button></div>
 
-<section class="shop" id="shop">
-<div class="top">
-<div><p style="color:var(--g)">THE COLLECTION</p><h2>Find Your Pair</h2></div>
-<input class="search" id="search" placeholder="Search shoes..." oninput="render()">
-</div>
-<div class="filters">
-<button class="filter active" onclick="filterCat('All',this)">All</button>
-<button class="filter" onclick="filterCat('Running',this)">Running</button>
-<button class="filter" onclick="filterCat('Street',this)">Street</button>
-<button class="filter" onclick="filterCat('Classic',this)">Classic</button>
-</div>
-<br>
-<div class="grid" id="grid"></div>
-</section>
+<section class="grid" id="products"></section>
 
-<section class="news">
-<h2>Stay in the vibe.</h2>
-<p>Get new drops and offers directly in your inbox.</p>
-<input placeholder="Your email address" id="email"><button class="primary" onclick="subscribe()">Join →</button>
-</section>
+<div class="cart" id="cart"><button class="close" onclick="closeCart()">✕</button><h2>YOUR CART</h2><div id="cartitems"></div><div class="total">Total: ₹<span id="total">0</span></div><button class="btn" style="width:100%" onclick="checkout()">CHECKOUT →</button></div>
 
-<footer>
-© 2026 SoleVibe · College Field Project
-<div class="credit">Designed & Developed by Shrushti Pawar</div>
-</footer>
+<div class="modal" id="modal"><div class="box" id="modalbox"></div></div>
 
-<div class="drawer" id="drawer">
-<div class="dhead"><h2>Your Cart</h2><button class="close" onclick="closeCart()">×</button></div>
-<div class="items" id="cartItems"></div>
-<div class="drawbottom">
-<div class="total" id="total"><span>Items: 0</span><b>₹0</b></div>
-<button class="primary" style="width:100%" onclick="openCheckout()">Proceed to Checkout →</button>
-</div>
-</div>
-
-<div class="modal" id="modal">
-<div class="box" id="modalContent"></div>
-</div>
-<div class="toast" id="toast"></div>
+<footer>© 2026 SoleVibe · College Field Project · Designed & Developed by Shrushti Pawar</footer>
 
 <script>
-const products=[
-{id:1,name:"Air Nova X",cat:"Running",price:4299,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=700&q=85"},
-{id:2,name:"Street Phantom",cat:"Street",price:3899,img:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?auto=format&fit=crop&w=700&q=85"},
-{id:3,name:"Velocity Pro",cat:"Running",price:5199,img:"https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?auto=format&fit=crop&w=700&q=85"},
-{id:4,name:"Urban Pulse",cat:"Street",price:3599,img:"https://images.unsplash.com/photo-1552346154-21d32810aba3?auto=format&fit=crop&w=700&q=85"},
-{id:5,name:"Aero Shift",cat:"Running",price:4699,img:"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?auto=format&fit=crop&w=700&q=85"},
-{id:6,name:"Cloud Runner",cat:"Running",price:4899,img:"https://images.unsplash.com/photo-1556906781-9a412961c28c?auto=format&fit=crop&w=700&q=85"},
-{id:7,name:"Mono Edge",cat:"Classic",price:3299,img:"https://images.unsplash.com/photo-1560769629-975ec94e6a86?auto=format&fit=crop&w=700&q=85"},
-{id:8,name:"Velocity Max",cat:"Running",price:5499,img:"https://images.unsplash.com/photo-1539185441755-769473a23570?auto=format&fit=crop&w=700&q=85"},
-{id:9,name:"Retro Wave",cat:"Classic",price:3799,img:"https://images.unsplash.com/photo-1514989940723-e8e51635b782?auto=format&fit=crop&w=700&q=85"},
-{id:10,name:"Flex Runner",cat:"Running",price:4099,img:"https://images.unsplash.com/photo-1460353581641-37baddab0fa2?auto=format&fit=crop&w=700&q=85"},
-{id:11,name:"Shadow Street",cat:"Street",price:3999,img:"https://images.unsplash.com/photo-1543508282-6319a3e2621f?auto=format&fit=crop&w=700&q=85"},
-{id:12,name:"Gravity One",cat:"Classic",price:4499,img:"https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=700&q=85"}
+const P=[
+["Air Nova X","Sneakers",3999,"https://images.unsplash.com/photo-1542291026-7eec264c27ff","Lightweight street sneaker."],
+["Street Phantom","Sneakers",4499,"https://images.unsplash.com/photo-1552346154-21d32810aba3","Dark premium street style."],
+["Velocity Pro","Running",4999,"https://images.unsplash.com/photo-1556906781-9a412961c28c","Fast and flexible runner."],
+["Urban Pulse","Casual",3499,"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77","Everyday urban comfort."],
+["Aero Shift","Sports",5299,"https://images.unsplash.com/photo-1600185365483-26d7a4cc7519","Performance inspired design."],
+["Cloud Runner","Running",4599,"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3","Soft cushioning for long walks."],
+["Mono Edge","Sneakers",3799,"https://images.unsplash.com/photo-1608231387042-66d1773070a5","Clean monochrome finish."],
+["Velocity Max","Sports",5799,"https://images.unsplash.com/photo-1460353581641-37baddab0fa2","Maximum comfort and support."],
+["Retro Wave","Casual",4299,"https://images.unsplash.com/photo-1495474472287-4d71bcdd2085","Retro inspired everyday pair."],
+["Flex Runner","Running",4899,"https://images.unsplash.com/photo-1554130840-3c9a4b7f4a6d","Flexible lightweight runner."],
+["Shadow Street","Sneakers",4199,"https://images.unsplash.com/photo-1607522370275-f14206abe5d3","Bold black street sneaker."],
+["Gravity One","Sports",5499,"https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2","Modern performance silhouette."]
 ];
+let C=JSON.parse(localStorage.soleCart||"[]"),F="All",wish=[];
 
-let cart=JSON.parse(localStorage.getItem("solevibe_cart")||"[]");
-let wish=JSON.parse(localStorage.getItem("solevibe_wish")||"[]");
-let category="All";
-
-const money=n=>"₹"+n.toLocaleString("en-IN");
-
-function save(){localStorage.setItem("solevibe_cart",JSON.stringify(cart));localStorage.setItem("solevibe_wish",JSON.stringify(wish))}
-function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1800)}
-
+const money=n=>n.toLocaleString("en-IN");
+function filter(x,b){F=x;document.querySelectorAll(".cat").forEach(a=>a.classList.remove("on"));b.classList.add("on");render()}
 function render(){
-let q=document.getElementById("search").value.toLowerCase();
-let list=products.filter(p=>(category==="All"||p.cat===category)&&p.name.toLowerCase().includes(q));
-document.getElementById("grid").innerHTML=list.map(p=>`
-<div class="card">
-<button class="heart ${wish.includes(p.id)?"on":""}" onclick="toggleWish(${p.id})">${wish.includes(p.id)?"♥":"♡"}</button>
-<div class="pic"><img src="${p.img}" alt="${p.name}"></div>
-<div class="info"><h3>${p.name}</h3><p>${p.cat} · Premium Collection</p><span class="price">${money(p.price)}</span><button class="buy" onclick="add(${p.id},this)">Add +</button></div>
-</div>`).join("");
+ let q=document.getElementById("search").value.toLowerCase(),a=P.filter(x=>(F=="All"||x[1]==F)&&x[0].toLowerCase().includes(q));
+ document.getElementById("products").innerHTML=a.map((x,i)=>`<article class="card"><div class="pic"><img src="${x[3]}" loading="lazy"><button class="heart" onclick="event.stopPropagation();this.innerHTML=this.innerHTML=='♡'?'♥':'♡'">♡</button></div><div class="info"><small>${x[1]}</small><h3>${x[0]}</h3><div class="row"><b class="price">₹${money(x[2])}</b><button class="add" onclick="quick(${P.indexOf(x)})">VIEW</button></div></div></article>`).join("")
 }
-
-function filterCat(c,b){category=c;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()}
-function toggleWish(id){wish.includes(id)?wish=wish.filter(x=>x!==id):wish.push(id);save();render();toast(wish.includes(id)?"Added to wishlist ♥":"Removed from wishlist")}
-function add(id,btn){
-let p=products.find(x=>x.id===id),old=btn.closest(".card").querySelector("img");
-let r=old.getBoundingClientRect(),fly=document.createElement("img");fly.src=p.img;fly.className="fly";fly.style.left=r.left+"px";fly.style.top=r.top+"px";document.body.appendChild(fly);setTimeout(()=>fly.remove(),700);
-let x=cart.find(i=>i.id===id);x?x.qty++:cart.push({id,qty:1});save();updateCart();toast(p.name+" added to cart 🛒")
+function quick(i){
+ let p=P[i],s="7";
+ modal.innerHTML=`<div class="box"><button class="close" onclick="closeModal()">✕</button><div class="productview"><img src="${p[3]}"><div><small>${p[1]}</small><h2>${p[0]}</h2><h2 class="price">₹${money(p[2])}</h2><p style="color:#999;line-height:1.6">${p[4]}</p><div class="sizes"><b>SELECT SIZE • EU / IN</b><div class="sizegrid">${[6,7,8,9,10,11].map(n=>`<button class="sizebtn ${n==7?"on":""}" onclick="sel(this,${n})">${n}</button>`).join("")}</div></div><button class="btn" style="width:100%" onclick="add(${i},s);closeModal()">ADD TO CART • SIZE <span id="sz">7</span></button></div></div></div>`;
+ modal.classList.add("show")
 }
-function changeQty(id,n){let x=cart.find(i=>i.id===id);if(!x)return;x.qty+=n;if(x.qty<=0)cart=cart.filter(i=>i.id!==id);save();updateCart()}
-function openCart(){document.getElementById("drawer").classList.add("show");updateCart()}
-function closeCart(){document.getElementById("drawer").classList.remove("show")}
-
-function updateCart(){
-let el=document.getElementById("cartItems"),count=cart.reduce((s,x)=>s+x.qty,0);
-document.getElementById("cartNum").textContent=count;
-if(!cart.length){
-el.innerHTML='<p style="color:#666;text-align:center;margin-top:45px">Your cart is empty.<br><br>Find your next pair 👟</p>';
-document.getElementById("total").innerHTML="<span>Items: 0</span><b>₹0</b>";return
+function sel(b,n){document.querySelectorAll(".sizebtn").forEach(x=>x.classList.remove("on"));b.classList.add("on");s=n;document.getElementById("sz").textContent=n}
+let s=7;
+function add(i,size){let z=C.find(x=>x.i==i&&x.s==size);z?z.q++:C.push({i,s:size,q:1});save();openCart();flash()}
+function flash(){let e=document.querySelector("#count");e.animate([{transform:"scale(1)"},{transform:"scale(1.7)"},{transform:"scale(1)"}],{duration:450})}
+function save(){localStorage.soleCart=JSON.stringify(C);draw()}
+function draw(){
+ let n=C.reduce((a,x)=>a+x.q,0),t=C.reduce((a,x)=>a+P[x.i][2]*x.q,0);count.textContent=n;total.textContent=money(t);
+ cartitems.innerHTML=C.length?C.map((x,j)=>{let p=P[x.i];return`<div class="item"><img src="${p[3]}"><div style="flex:1"><b>${p[0]}</b><small style="display:block;color:#888">Size ${x.s} • ₹${money(p[2])} each</small><b class="price">₹${money(p[2]*x.q)}</b><div class="qty"><button onclick="qty(${j},-1)">−</button> ${x.q} <button onclick="qty(${j},1)">+</button></div></div></div>`}).join(""):`<div class="empty">Your cart is empty 🛒</div>`
 }
-let total=0;
-el.innerHTML=cart.map(i=>{
-let p=products.find(x=>x.id===i.id),line=p.price*i.qty;total+=line;
-return `<div class="item"><img src="${p.img}"><div class="iteminfo"><h4>${p.name}</h4><p>${money(p.price)} each</p><div class="lineTotal">${i.qty} × ${money(p.price)} = ${money(line)}</div><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><span>${i.qty}</span><button onclick="changeQty(${p.id},1)">+</button><button onclick="changeQty(${p.id},-${i.qty})">🗑</button></div></div></div>`
-}).join("");
-document.getElementById("total").innerHTML=`<span>Items: ${count}</span><b>${money(total)}</b>`;
+function qty(j,d){C[j].q+=d;if(C[j].q<1)C.splice(j,1);save()}
+function openCart(){cart.classList.add("show");draw()}function closeCart(){cart.classList.remove("show")}
+function closeModal(){modal.classList.remove("show")}
+function checkout(){
+ if(!C.length)return alert("Your cart is empty!");
+ modal.innerHTML=`<div class="box"><button class="close" onclick="closeModal()">✕</button><h2>CHECKOUT</h2><div style="margin:20px 0">${C.map(x=>`<div style="padding:9px 0;border-bottom:1px solid #292929">${P[x.i][0]} × ${x.q} • Size ${x.s} • ₹${money(P[x.i][2]*x.q)}</div>`).join("")}</div><div class="total">Total: ₹${money(C.reduce((a,x)=>a+P[x.i][2]*x.q,0))}</div><div class="form"><input id="name" placeholder="Full name"><input id="phone" placeholder="Phone number"><input id="address" placeholder="Delivery address"></div><button class="btn" style="width:100%;margin-top:12px" onclick="place()">PLACE ORDER</button></div>`;
+ closeCart();modal.classList.add("show")
 }
-
-function openCheckout(){
-if(!cart.length){toast("Your cart is empty");return}
-closeCart();
-let total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0);
-let summary=cart.map(i=>{let p=products.find(x=>x.id===i.id);return `<div class="summaryrow"><span>${p.name} × ${i.qty}</span><strong>${money(p.price*i.qty)}</strong></div>`}).join("");
-document.getElementById("modalContent").innerHTML=`
-<p style="color:var(--g)">SECURE CHECKOUT</p><h2>Complete your order</h2>
-<div class="summary"><b>Order Summary</b>${summary}<hr style="border-color:#333;margin:8px 0"><div class="summaryrow"><strong>Total</strong><strong style="color:var(--g);font-size:20px">${money(total)}</strong></div></div>
-<div class="form">
-<input id="name" placeholder="Full name">
-<input id="phone" placeholder="Mobile number">
-<input id="address" placeholder="Delivery address">
-<input id="city" placeholder="City / Pincode">
-<div><b>Payment method</b><div class="pay"><label><input type="radio" name="pay" value="UPI" checked> UPI</label><label><input type="radio" name="pay" value="Card"> Card</label><label><input type="radio" name="pay" value="COD"> COD</label></div></div>
-<button class="primary" onclick="placeOrder()">Place Order →</button>
-<button class="headbtn" style="width:100%" onclick="closeModal()">Cancel</button>
-</div>`;
-document.getElementById("modal").classList.add("show")
+function place(){
+ if(!name.value.trim()||phone.value.trim().length<10||!address.value.trim())return alert("Please enter valid name, 10-digit phone and address.");
+ modal.innerHTML=`<div class="box" style="text-align:center;padding:50px 25px"><div style="font-size:60px">✓</div><h1 style="font-size:45px">ORDER<br><span>PLACED!</span></h1><p style="color:#999">Thank you for shopping with SoleVibe.</p><button class="btn" onclick="C=[];save();closeModal();render()">CONTINUE SHOPPING</button></div>`;
+ C=[];save()
 }
-
-function closeModal(){document.getElementById("modal").classList.remove("show")}
-function placeOrder(){
-let name=document.getElementById("name").value.trim(),phone=document.getElementById("phone").value.trim(),address=document.getElementById("address").value.trim(),city=document.getElementById("city").value.trim();
-if(!name||!phone||!address||!city){toast("Please fill all details");return}
-if(!/^[0-9]{10}$/.test(phone)){toast("Enter a valid 10-digit mobile number");return}
-let total=cart.reduce((s,i)=>s+products.find(p=>p.id===i.id).price*i.qty,0),order="SV"+Math.floor(100000+Math.random()*900000);
-document.getElementById("modalContent").innerHTML=`<div class="success"><div class="tick">✓</div><h2>Order Placed!</h2><p>Your SoleVibe order <b style="color:var(--g)">#${order}</b> has been successfully placed.</p><p>Total paid/amount due: <b style="color:var(--g)">${money(total)}</b></p><button class="primary" onclick="closeModal()">Continue Shopping</button></div>`;
-cart=[];save();updateCart()
-}
-function subscribe(){let e=document.getElementById("email").value.trim();if(!e||!e.includes("@")){toast("Enter a valid email");return}toast("You're on the SoleVibe list ✨");document.getElementById("email").value=""}
-render();updateCart();
-</script>
-</body>
-  </html>
+render();draw();
+</script></body></html>
